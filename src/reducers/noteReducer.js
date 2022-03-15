@@ -1,16 +1,17 @@
+/* eslint-disable no-case-declarations */
 const noteReducer = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'NEW_NOTE':
       return [...state, action.data]
     case 'TOGGLE_IMPORTANCE':
       const id = action.data.id
       const noteToChange = state.find(n => n.id === id)
-      const changedNote = { 
-        ...noteToChange, 
-        important: !noteToChange.important 
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important
       }
       return state.map(note =>
-        note.id !== id ? note : changedNote 
+        note.id !== id ? note : changedNote
       )
     default:
       return state
@@ -20,6 +21,7 @@ const noteReducer = (state = [], action) => {
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
 
+/* action creators */
 export const createNote = (content) => {
   return {
     type: 'NEW_NOTE',
@@ -31,7 +33,7 @@ export const createNote = (content) => {
   }
 }
 
-export const toggleImportanceOf = (id) => {
+export const toggleImportanceOf = id => {
   return {
     type: 'TOGGLE_IMPORTANCE',
     data: { id }
